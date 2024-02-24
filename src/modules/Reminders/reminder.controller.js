@@ -1,6 +1,6 @@
 import { prescribedMedicineModel } from "../../../DB/Models/prescribedMedicine.model.js";
 import { reminderModel } from "../../../DB/Models/reminder.model.js";
-import FCM from 'fcm-node/lib/fcm.js';
+//import FCM from 'fcm-node/lib/fcm.js';
 
 //================================== add reminder ==========================
 export const createReminder = async (req, res, next) => {

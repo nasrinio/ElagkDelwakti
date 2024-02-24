@@ -6,7 +6,7 @@ import * as routers from "../modules/index.routes.js";
 //import { client } from "../services/sendSMS.js";
 // import { whatsappClient } from "../services/whatsappClient.js";
 // import {client} from "../services/whatsappClient.js"
-import FCM from 'fcm-node/lib/fcm.js';
+//import FCM from 'fcm-node/lib/fcm.js';
 
 export const initiateApp = (app, express) => {
   const port = process.env.PORT;
@@ -28,35 +28,35 @@ export const initiateApp = (app, express) => {
   app.use("/prescription", routers.prescriptionRouter);
   app.use("/prescribedMedicine", routers.prescribedMedicineRouter);
 
-  app.post('/fcm', async(req, res, next) => {
-    try {
-        let fcm = new FCM(process.env.SERVERKEY)
-        let message = {
-            to: '/topics/' + req.body.topic,
-            notification: {
-                title: req.body.title,
-                body: req.body.body,
-                sound: "default",
-                click_action: "FCM_PLUGIN_ACTIVITY",
-                icon: "fcm_push_icon"
-            },
-            // data: {
-            //     title: req.body.title,
-            //     body: req.body.body
-            // }
-        }
-    fcm.send(message ,(err, response) => {
-        if (err) {
-            next(err)
-        }else{
-            res.send(response)
-        }
-    })
+//   app.post('/fcm', async(req, res, next) => {
+//     try {
+//         let fcm = new FCM(process.env.SERVERKEY)
+//         let message = {
+//             to: '/topics/' + req.body.topic,
+//             notification: {
+//                 title: req.body.title,
+//                 body: req.body.body,
+//                 sound: "default",
+//                 click_action: "FCM_PLUGIN_ACTIVITY",
+//                 icon: "fcm_push_icon"
+//             },
+//             // data: {
+//             //     title: req.body.title,
+//             //     body: req.body.body
+//             // }
+//         }
+//     fcm.send(message ,(err, response) => {
+//         if (err) {
+//             next(err)
+//         }else{
+//             res.send(response)
+//         }
+//     })
 
-    } catch (error) {
-        next(error)
-    }
-})
+//     } catch (error) {
+//         next(error)
+//     }
+// })
 
 
 
