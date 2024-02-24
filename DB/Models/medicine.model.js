@@ -9,7 +9,7 @@ const medicineSchema = new Schema(
     },
     prescriptionRequired: {
       type: Boolean,
-      required: true,
+      required: true, 
     },
     storageCondition: {
       type: String,
