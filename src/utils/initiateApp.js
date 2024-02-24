@@ -1,6 +1,7 @@
 import { connectionDB } from "../../DB/connection.js";
 import { globalResponse } from "./errorhandling.js";
 import * as routers from "../modules/index.routes.js";
+import cors from "cors";
 //import {uploadProcessData} from "./firebase.js"
  //import { reminderCron } from './crons.js'
 //import { client } from "../services/sendSMS.js";
@@ -8,14 +9,17 @@ import * as routers from "../modules/index.routes.js";
 // import {client} from "../services/whatsappClient.js"
 //import FCM from 'fcm-node/lib/fcm.js';
 
+
 export const initiateApp = (app, express) => {
-  const port = process.env.PORT;
-
-  app.use(express.json());
-  //app.use(express.urlencoded({ extended: false }));
-
-  connectionDB();
-
+    const port = process.env.PORT;
+    
+    app.use(express.json());
+    //app.use(express.urlencoded({ extended: false }));
+    
+    connectionDB();
+    app.use(cors());
+    
+    app.get("/", (req, res) => res.send("Hello World!"));
   app.use("/pharmacy", routers.pharmacyRouter);
   // app.use('/subCategory', routers.subCategoryRouter)
   app.use("/medicine", routers.medicineRouter);
@@ -69,6 +73,5 @@ export const initiateApp = (app, express) => {
    //reminderCron(
 //client
 
-  app.get("/", (req, res) => res.send("Hello World!"));
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 };
