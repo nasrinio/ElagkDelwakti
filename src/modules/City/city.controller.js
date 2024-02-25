@@ -33,15 +33,18 @@ if (await cityModel.findOne({ name })) {
   res.status(200).json({ message: 'Added Done', city })
 }
 //uploadProcessData
-export const getAllCities = async (req, res, next) => {
-  const cities = await cityModel.find().populate([
-    {
-      path: 'governateId',
-    },
-    res.status(200).json({ message: 'All cities', cities }),
 
-  ])
+
+
+export const getAllCities = async (req, res) => {
+  try {
+    const cities = await cityModel.find().populate("governateId", "name");
+    res.status(200).json({ cities });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
+};
   
 // // ========================================== upadte Category ==========================================
 // export const updateCategory = async (req, res, next) => {
