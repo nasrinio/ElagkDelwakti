@@ -37,7 +37,9 @@ export const getAllCities = async (req, res, next) => {
   const cities = await cityModel.find().populate([
     {
       path: 'governateId',
-    }
+    },
+    res.status(200).json({ message: 'All cities', cities }),
+
   ])
   }
   
