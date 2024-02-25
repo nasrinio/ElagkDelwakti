@@ -33,14 +33,12 @@ if (await cityModel.findOne({ name })) {
   res.status(200).json({ message: 'Added Done', city })
 }
 //uploadProcessData
-export const firebase = async (req, res, next) => {
-  const suc = await uploadProcessData()
-  if (!suc) {
-    return next(
-      new Error('try again later , fail to add City', { cause: 400 }),
-    )
-  }
-  res.status(200).json({ message: 'Added Done', city })
+export const getAllCities = async (req, res, next) => {
+  const cities = await cityModel.find().populate([
+    {
+      path: 'governateId',
+    }
+  ])
   }
   
 // // ========================================== upadte Category ==========================================

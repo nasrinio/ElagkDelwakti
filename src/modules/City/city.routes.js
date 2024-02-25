@@ -16,7 +16,7 @@ router.post(
 
 router.get(
   '/',
-  asyncHandler(cc.firebase),
+  asyncHandler(cc.getAllCities),
 )
 
 // router.get(
