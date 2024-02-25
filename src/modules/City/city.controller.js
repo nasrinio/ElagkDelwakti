@@ -36,15 +36,16 @@ if (await cityModel.findOne({ name })) {
 
 
 
-export const getAllCities = async (req, res) => {
+export const getAllCities = async (req, res, next) => {
   try {
-    const cities = await cityModel.find().populate("governateId", "name");
+    const cities = await cityModel.find();
     res.status(200).json({ cities });
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
   
 // // ========================================== upadte Category ==========================================
 // export const updateCategory = async (req, res, next) => {
