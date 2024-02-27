@@ -11,6 +11,11 @@ const router = Router();
 
 router.post("/", asyncHandler(gc.createGovernate));
 
+router.get(
+    '/',
+    asyncHandler(gc.getAllGovernates),
+  )
+  
 // router.put(
 //   '/',
 //   asyncHandler(gc.updateProduct),
