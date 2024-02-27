@@ -9,7 +9,7 @@ import { governateModel } from "../../../DB/Models/governate.js"
 // import { productModel } from '../../../DB/Models/product.model.js'
 // const nanoid = customAlphabet('123456_=!ascbhdtel', 5)
 
-// // ========================================== create Category ==========================================
+ // ========================================== create Category ==========================================
 export const createGovernate = async (req, res, next) => {
 //   const { _id } = req.authUser
 const { name } = req.body
@@ -32,6 +32,20 @@ if (await governateModel.findOne({ name })) {
   res.status(200).json({ message: 'Added Done', governate })
 }
 
+//======================= getAllGovernates =============
+export const getAllGovernates = async (req, res, next) => {
+  try {
+    const governates = await governateModel.find();
+    if (!governates) {
+      return next(new Error("cities not found", { cause: 404 }));
+    }
+    res.status(200).json({ governates });
+
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
 // // ========================================== upadte Category ==========================================
 // export const updateCategory = async (req, res, next) => {
 //   const { _id } = req.authUser

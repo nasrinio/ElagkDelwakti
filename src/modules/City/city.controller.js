@@ -35,11 +35,15 @@ if (await cityModel.findOne({ name })) {
 //uploadProcessData
 
 
-
+//=========================================== get all Category ==========================================
 export const getAllCities = async (req, res, next) => {
   try {
     const cities = await cityModel.find();
+    if (!cities) {
+      return next(new Error("cities not found", { cause: 404 }));
+    }
     res.status(200).json({ cities });
+
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ message: "Internal server error" });
