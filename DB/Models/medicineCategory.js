@@ -8,6 +8,9 @@ const medicineCategorySchema = new Schema(
       lowercase: true,
       required: true,
     },
+    description: {
+      type: String,
+    }
   },
   { timestamps: true }
 );
