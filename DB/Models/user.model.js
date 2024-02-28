@@ -27,17 +27,17 @@ const userSchema = new Schema(
     },
     phoneNumber: {
       type: String,
-      required: true,
+      required: false,
     },
     streetName: {
       type: String,
-      required: true,
+      required: false,
     },
     buildingNum: String,
     cityId: {
       type: Schema.Types.ObjectId,
       ref: "City",
-      required: true,
+      required: false,
     },
     profilePicture: {
       secure_url: String,
