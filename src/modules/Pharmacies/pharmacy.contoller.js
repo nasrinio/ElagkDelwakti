@@ -10,6 +10,7 @@ const nanoid = customAlphabet("123456_=!ascbhdtel", 5);
 // ========================================== create Pharmacy ==========================================
 
 export const createPharmacy = async (req, res, next) => {
+  try {
     const {
       pharmacyName,
       unitPrice,
@@ -30,11 +31,6 @@ export const createPharmacy = async (req, res, next) => {
     if (!cityExists) {
       return next(new Error("Invalid city", { cause: 400 }));
     }
-    // slug
-    //   const slug = slugify(name, {
-    //     replacement: "",
-    //     lower: true,
-    //   });
 
     // Check if logo is uploaded
     if (!req.file) {
@@ -52,7 +48,10 @@ export const createPharmacy = async (req, res, next) => {
       }
     );
 
-    //!db
+    // Combine streetName, buildingNum, and cityId into address
+    const address = `${streetName}, ${buildingNum}, ${cityId}`;
+
+    // Create pharmacy object with the address
     const pharmacyObject = {
       pharmacyName,
       unitPrice,
@@ -61,6 +60,7 @@ export const createPharmacy = async (req, res, next) => {
       streetName,
       buildingNum,
       cityId,
+      address, // Assign the combined address
       logo: { secure_url, public_id },
       customId,
     };
@@ -75,8 +75,11 @@ export const createPharmacy = async (req, res, next) => {
 
     res.status(200).json({ message: "Pharmacy added successfully", pharmacy });
 
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
-
 
 // =====================find Pharmacies By Medicine And City ==========================================
 
