@@ -18,6 +18,10 @@ router.get(
   '/',
   asyncHandler(cc.getAllCities),
 )
+router.get(
+  '/citiesOfGov',
+  asyncHandler(cc.getCitiesByGovernateName),
+)
 
 // router.get(
 //   '/',
