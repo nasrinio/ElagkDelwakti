@@ -50,15 +50,6 @@ const pharmacySchema = new Schema(
   { timestamps: true }
 );
 
-// // Define virtual property 'address' to combine streetName, buildingNum, and cityId
-// pharmacySchema.virtual('address').get(function() {
-//   return `${this.streetName}, ${this.buildingNum}, ${this.cityId}`;
-// });
-
-// // Set 'address' property as unique
-// pharmacySchema.index({ address: 1 }, { unique: true });
-
-
 export const pharmacyModel = model("Pharmacy", pharmacySchema);
 
 
