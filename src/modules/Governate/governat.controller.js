@@ -46,6 +46,20 @@ export const getAllGovernates = async (req, res, next) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // // ========================================== upadte Category ==========================================
 // export const updateCategory = async (req, res, next) => {
 //   const { _id } = req.authUser

@@ -66,6 +66,51 @@ export const medicineModel = model("Medicine", medicineSchema);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import { Schema, model } from 'mongoose'
 
 // const brandSchema = new Schema(

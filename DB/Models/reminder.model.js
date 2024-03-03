@@ -38,6 +38,43 @@ const reminderSchema = new Schema(
 
 export const reminderModel = model("Reminder", reminderSchema);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import { Schema, model } from 'mongoose'
 
 // const couponSchema = new Schema(

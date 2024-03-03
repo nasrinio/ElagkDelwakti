@@ -32,6 +32,35 @@ if (await medicineCategoryModel.findOne({ name })) {
   res.status(200).json({ message: 'Added Done', medicineCategory })
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // // ========================================== upadte Category ==========================================
 // export const updateCategory = async (req, res, next) => {
 //   const { _id } = req.authUser

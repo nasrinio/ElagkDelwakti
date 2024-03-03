@@ -19,6 +19,42 @@ const prescriptionSchema = new Schema(
 export const prescriptionModel = model('Prescription', prescriptionSchema)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // const { Schema, model } = ("mongoose");
 
 // import { Schema, model } from 'mongoose'

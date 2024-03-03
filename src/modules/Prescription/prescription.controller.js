@@ -50,6 +50,19 @@ export const createPrescription = async (req, res, next) => {
     res.status(200).json({ message: "Added Done", prescription });
   };
   
+
+
+
+
+
+
+
+
+
+
+
+
+  
 // //======================================= create subCategory ==============================
 // export const createSubCategory = async (req, res, next) => {
 //   const { categoryId } = req.params

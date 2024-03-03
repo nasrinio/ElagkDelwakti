@@ -117,6 +117,26 @@ export const getAllPharmacies = async (req, res) => {
   }
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // // ========================================== upadte Category ==========================================
 // export const updateCategory = async (req, res, next) => {
 //   const { _id } = req.authUser

@@ -20,6 +20,62 @@ const prescribedMedicineSchema = new Schema(
 
 export const prescribedMedicineModel = model('PrescribedMedicine', prescribedMedicineSchema)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import { Schema, model } from 'mongoose'
 
 // const subCategorySchema = new Schema(

@@ -56,6 +56,31 @@ export const createPrescriptionMedicines = async (req, res, next) => {
 
   
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
 // //======================================= create subCategory ==============================
 // export const createSubCategory = async (req, res, next) => {
 //   const { categoryId } = req.params

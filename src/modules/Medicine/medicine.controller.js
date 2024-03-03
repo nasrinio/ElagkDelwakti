@@ -68,4 +68,3 @@ export const addMedicine = async (req, res, next) => {
    res.status(201).json({ message: 'CreatedDone', dbMedicine })
 };
 
-// // TODO: update and delete brand , get all brands with products
