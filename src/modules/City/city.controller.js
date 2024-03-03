@@ -2,6 +2,8 @@
 // import cloudinary from '../../utils/coludinaryConfigrations.js'
 
 import { cityModel } from "../../../DB/Models/city.js"
+import { governateModel } from "../../../DB/Models/governate.js";
+
 //import { uploadProcessData } from "../../utils/firebase.js"
 
 // import { customAlphabet } from 'nanoid'
@@ -10,7 +12,8 @@ import { cityModel } from "../../../DB/Models/city.js"
 // import { productModel } from '../../../DB/Models/product.model.js'
 // const nanoid = customAlphabet('123456_=!ascbhdtel', 5)
 
-// // ========================================== create Category ==========================================
+
+// ========================================== add city ==========================================
 export const createCity = async (req, res, next) => {
 const {governateId} = req.query
 const { name } = req.body
@@ -32,10 +35,10 @@ if (await cityModel.findOne({ name })) {
 
   res.status(200).json({ message: 'Added Done', city })
 }
-//uploadProcessData
 
 
-//=========================================== get all Category ==========================================
+
+//=========================================== get all cities ==========================================
 export const getAllCities = async (req, res, next) => {
   try {
     const cities = await cityModel.find();
@@ -49,6 +52,31 @@ export const getAllCities = async (req, res, next) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+//====================================getCitiesByGovernateName======================================
+export const getCitiesByGovernateName = async (req, res, next) => {
+  try {
+    const { governateName } = req.body;
+    // Find the governate based on the provided name
+    const governate = await governateModel.findOne({ name: governateName });
+
+    if (!governate) {
+      return res.status(404).json({ message: "Governate not found" });
+    }
+
+    // Find all cities associated with the found governate
+    const cities = await cityModel.find({ governateId: governate._id });
+
+    if (!cities || cities.length === 0) {
+      return res.status(404).json({ message: "No cities found for this governate" });
+    }
+
+    res.status(200).json({ cities });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 
   
 // // ========================================== upadte Category ==========================================
