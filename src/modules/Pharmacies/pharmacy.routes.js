@@ -17,7 +17,7 @@ router.post(
   //isAuth(),
   multerCloudFunction(allowedExtensions.Image).single('image'),
   //validationCoreFunction(validators.createPharmacySchema),
-  asyncHandler(pc.createPharmacy),
+  pc.createPharmacy,
 )
 
 // router.put(
