@@ -19,9 +19,10 @@ export const createPharmacy = async (req, res, next) => {
   } = req.body;
   const { medicineId, cityId } = req.query;
   // check medicineId and cityId
-  const medicineExists = await medicineModel.findById(medicineId);
-  const cityExists = await cityModel.findById(cityId);
-
+  const [medicineExists, cityExists] = await Promise.all([
+    medicineModel.findById(medicineId),
+    cityModel.findById(cityId),
+  ]);
   if (!medicineExists) {
     return next(new Error("invalid medicine", { cause: 400 }));
   }
@@ -33,7 +34,6 @@ export const createPharmacy = async (req, res, next) => {
   //     replacement: "",
   //     lower: true,
   //   });
-
   //logo
   if (!req.file) {
     return next(new Error("please upload your logo", { cause: 400 }));
@@ -66,10 +66,8 @@ export const createPharmacy = async (req, res, next) => {
       new Error("try again later , fail to add your pharmacy", { cause: 400 })
     );
   }
-
   res.status(200).json({ message: "Added Done", pharmacy });
 };
-
 
 
 
