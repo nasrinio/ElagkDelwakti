@@ -42,10 +42,10 @@ export const createPharmacy = async (req, res, next) => {
   //     lower: true,
   //   });
   //logo
-  if (!req.file) {
-    console.log("No logo uploaded");
-    return next(new Error("please upload your logo", { cause: 400 }));
-  }
+  // if (!req.file) {
+  //   console.log("No logo uploaded");
+  //   return next(new Error("please upload your logo", { cause: 400 }));
+  //}
   const customId = nanoid();
   const { secure_url, public_id } = await cloudinary.uploader.upload(
     req.file.path,
@@ -63,7 +63,7 @@ export const createPharmacy = async (req, res, next) => {
     streetName,
     buildingNum,
     //slug,
-    logo: { secure_url, public_id },
+    //logo: { secure_url, public_id },
     medicineId,
     cityId,
     customId,
@@ -72,7 +72,7 @@ export const createPharmacy = async (req, res, next) => {
   const pharmacy = await pharmacyModel.create(pharmacyObject);
   if (!pharmacy) {
     console.log("Failed to add pharmacy to database");
-    await cloudinary.uploader.destroy(public_id);
+    //await cloudinary.uploader.destroy(public_id);
     return next(
       new Error("try again later , fail to add your pharmacy", { cause: 400 })
     );

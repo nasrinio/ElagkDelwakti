@@ -6,16 +6,16 @@ const pharmacySchema = new Schema(
       type: String,
       required: true,    
     },
-    logo: {
-      secure_url: {
-        type: String,
-        required: true,
-      }, 
-      public_id: {
-        type: String,
-        required: true,
-      },
-    },
+    // logo: {
+    //   secure_url: {
+    //     type: String,
+    //     required: true,
+    //   }, 
+    //   public_id: {
+    //     type: String,
+    //     required: true,
+    //   },
+    // },
     unitPrice: {
       type: Number,
       required: true,
