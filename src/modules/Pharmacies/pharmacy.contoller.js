@@ -72,7 +72,7 @@ export const createPharmacy = async (req, res, next) => {
   const pharmacy = await pharmacyModel.create(pharmacyObject);
   if (!pharmacy) {
     console.log("Failed to add pharmacy to database");
-    //await cloudinary.uploader.destroy(public_id);
+    await cloudinary.uploader.destroy(public_id);
     return next(
       new Error("try again later , fail to add your pharmacy", { cause: 400 })
     );
