@@ -8,7 +8,6 @@ import { cityModel } from "../../../DB/Models/city.js";
 const nanoid = customAlphabet("123456_=!ascbhdtel", 5); 
 
 // ========================================== create Pharmacy ==========================================
-
 export const createPharmacy = async (req, res, next) => {
   const {
     pharmacyName,
