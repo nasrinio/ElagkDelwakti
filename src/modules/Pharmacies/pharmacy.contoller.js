@@ -17,9 +17,8 @@ export const createPharmacy = async (req, res, next) => {
     operatingHours,
     streetName,
     buildingNum,
-    cityId,
   } = req.body;
-  const { medicineId } = req.query;
+  const { medicineId, cityId } = req.query;
   console.log("medicineId:", medicineId);
   console.log("cityId:", cityId);
   // check medicineId and cityId
@@ -42,11 +41,11 @@ export const createPharmacy = async (req, res, next) => {
   //     replacement: "",
   //     lower: true,
   //   });
-  //logo
-  // if (!req.file) {
-  //   console.log("No logo uploaded");
-  //   return next(new Error("please upload your logo", { cause: 400 }));
-  //}
+  logo
+  if (!req.file) {
+    console.log("No logo uploaded");
+    return next(new Error("please upload your logo", { cause: 400 }));
+  }
   const customId = nanoid();
   const { secure_url, public_id } = await cloudinary.uploader.upload(
     req.file.path,
@@ -64,7 +63,7 @@ export const createPharmacy = async (req, res, next) => {
     streetName,
     buildingNum,
     //slug,
-    //logo: { secure_url, public_id },
+    logo: { secure_url, public_id },
     medicineId,
     cityId,
     customId,
