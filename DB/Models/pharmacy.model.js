@@ -52,7 +52,6 @@ const pharmacySchema = new Schema(
 
 export const pharmacyModel = model("Pharmacy", pharmacySchema);
 
-
 // import { Schema, model } from 'mongoose'
 
 // const PharmacySchema = new Schema(

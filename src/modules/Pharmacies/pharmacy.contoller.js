@@ -18,55 +18,56 @@ export const createPharmacy = async (req, res, next) => {
     buildingNum,
   } = req.body;
   const { medicineId, cityId } = req.query;
+  // check medicineId and cityId
+  const medicineExists = await medicineModel.findById(medicineId);
+  const cityExists = await cityModel.findById(cityId);
 
-  try {
-    // Check if medicineId and cityId are valid
-    const medicineExists = await medicineModel.findById(medicineId);
-    const cityExists = await cityModel.findById(cityId);
-
-    if (!medicineExists) {
-      return res.status(404).json({ error: "Invalid medicine ID" });
-    }
-    if (!cityExists) {
-      return res.status(404).json({ error: "Invalid city ID" });
-    }
-
-    // Check if logo is uploaded
-    if (!req.file) {
-      return res.status(400).json({ error: "Please upload your logo" });
-    }
-
-    const customId = nanoid();
-    const { secure_url, public_id } = await cloudinary.uploader.upload(
-      req.file.path,
-      {
-        folder: `${process.env.PROJECT_FOLDER}/Pharmacies/${pharmacyName + customId}`,
-      }
-    );
-
-    // Create pharmacy object
-    const pharmacyObject = {
-      pharmacyName,
-      unitPrice,
-      phoneNumber,
-      operatingHours,
-      streetName,
-      buildingNum,
-      logo: { secure_url, public_id },
-      medicineId,
-      cityId,
-      customId,
-    };
-
-    // Save pharmacy to database
-    const pharmacy = await pharmacyModel.create(pharmacyObject);
-
-    res.status(200).json({ message: "Pharmacy added successfully", pharmacy });
-  } catch (error) {
-    // Handle any errors
-    console.error("Error:", error);
-    res.status(500).json({ error: "Internal server error" });
+  if (!medicineExists) {
+    return next(new Error("invalid medicine", { cause: 400 }));
   }
+  if (!cityExists) {
+    return next(new Error("invalid city", { cause: 400 }));
+  }
+  // slug
+  //   const slug = slugify(name, {
+  //     replacement: "",
+  //     lower: true,
+  //   });
+
+  //logo
+  if (!req.file) {
+    return next(new Error("please upload your logo", { cause: 400 }));
+  }
+  const customId = nanoid();
+  const { secure_url, public_id } = await cloudinary.uploader.upload(
+    req.file.path,
+    {
+      folder: `${process.env.PROJECT_FOLDER}/Pharmacies/${pharmacyName + customId}`,
+    }
+  );
+  // !db
+  const pharmacyObject = {
+    pharmacyName,
+    unitPrice,
+    phoneNumber,
+    operatingHours,
+    streetName,
+    buildingNum,
+    //slug,
+    logo: { secure_url, public_id },
+    medicineId,
+    cityId,
+    customId,
+  };
+  const pharmacy = await pharmacyModel.create(pharmacyObject);
+  if (!pharmacy) {
+    await cloudinary.uploader.destroy(public_id);
+    return next(
+      new Error("try again later , fail to add your pharmacy", { cause: 400 })
+    );
+  }
+
+  res.status(200).json({ message: "Added Done", pharmacy });
 };
 
 
