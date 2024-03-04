@@ -15,7 +15,7 @@ const router = Router()
 router.post(
   '/addPharmacy',
   //isAuth(),
-  multerCloudFunction(allowedExtensions.Image).single('image'),
+  //multerCloudFunction(allowedExtensions.Image).single('image'),
   //validationCoreFunction(validators.createPharmacySchema),
   asyncHandler(pc.createPharmacy),
 )
