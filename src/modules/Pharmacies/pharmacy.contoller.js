@@ -1,7 +1,7 @@
 // import slugify from 'slugify'
 import cloudinary from "../../utils/coludinaryConfigrations.js";
 import { customAlphabet } from "nanoid";
-import { pharmacyModel } from "../../../DB/Models/pharmacy.model.js";
+import { pharmacyyModel } from "../../../DB/Models/pharmacyy.model.js";
 import { medicineModel } from "../../../DB/Models/medicine.model.js";
 import { cityModel } from "../../../DB/Models/city.js";
 
@@ -69,7 +69,7 @@ export const createPharmacy = async (req, res, next) => {
     customId,
   };
   console.log("Creating pharmacy in database");
-  const pharmacy = await pharmacyModel.create(pharmacyObject);
+  const pharmacy = await pharmacyyModel.create(pharmacyObject);
   if (!pharmacy) {
     console.log("Failed to add pharmacy to database");
     await cloudinary.uploader.destroy(public_id);
@@ -101,7 +101,7 @@ export const findPharmacies = async (req, res) => {
     }
 
     // Find pharmacies with the given medicine ID and city ID
-    const pharmacies = await pharmacyModel.find({
+    const pharmacies = await pharmacyyModel.find({
       medicineId: medicine._id,
       cityId: city._id,
     });
@@ -115,7 +115,7 @@ export const findPharmacies = async (req, res) => {
 //================== getAllPharmacies =======================================
 export const getAllPharmacies = async (req, res) => {
   try {
-    const pharmacies = await pharmacyModel.find().populate("cityId", "name");
+    const pharmacies = await pharmacyyModel.find().populate("cityId", "name");
     res.status(200).json({ pharmacies });
   } catch (error) {
     console.error("Error:", error);

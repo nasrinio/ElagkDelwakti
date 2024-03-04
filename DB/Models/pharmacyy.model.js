@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const pharmacySchema = new Schema(
+const pharmacyySchema = new Schema(
   {
     pharmacyName: {
       type: String,
@@ -50,7 +50,7 @@ const pharmacySchema = new Schema(
   { timestamps: true }
 );
 
-export const pharmacyModel = model("Pharmacy", pharmacySchema);
+export const pharmacyyModel = model("Pharmacyy", pharmacyySchema);
 
 // import { Schema, model } from 'mongoose'
 
