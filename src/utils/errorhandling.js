@@ -1,7 +1,7 @@
 export const asyncHandler = (API) => {
   return (req, res, next) => {
     API(req, res, next).catch((err) => {
-      console.log(err)
+      res.json({ message: err.message })
       return next(new Error('Fail', { cause: 500 }))
     })
   }
