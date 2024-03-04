@@ -9,6 +9,7 @@ const nanoid = customAlphabet("123456_=!ascbhdtel", 5);
 
 // ========================================== create Pharmacy ==========================================
 export const createPharmacy = async (req, res, next) => {
+  console.log("Start createPharmacy function");
   const {
     pharmacyName,
     unitPrice,
@@ -18,15 +19,21 @@ export const createPharmacy = async (req, res, next) => {
     buildingNum,
   } = req.body;
   const { medicineId, cityId } = req.query;
+  console.log("medicineId:", medicineId);
+  console.log("cityId:", cityId);
   // check medicineId and cityId
   const [medicineExists, cityExists] = await Promise.all([
     medicineModel.findById(medicineId),
     cityModel.findById(cityId),
   ]);
+  console.log("medicineExists:", medicineExists);
+  console.log("cityExists:", cityExists);
   if (!medicineExists) {
+    console.log("Invalid medicine");
     return next(new Error("invalid medicine", { cause: 400 }));
   }
   if (!cityExists) {
+    console.log("Invalid city");
     return next(new Error("invalid city", { cause: 400 }));
   }
   // slug
@@ -36,6 +43,7 @@ export const createPharmacy = async (req, res, next) => {
   //   });
   //logo
   if (!req.file) {
+    console.log("No logo uploaded");
     return next(new Error("please upload your logo", { cause: 400 }));
   }
   const customId = nanoid();
@@ -45,6 +53,7 @@ export const createPharmacy = async (req, res, next) => {
       folder: `${process.env.PROJECT_FOLDER}/Pharmacies/${pharmacyName + customId}`,
     }
   );
+  console.log("Uploaded logo to cloudinary");
   // !db
   const pharmacyObject = {
     pharmacyName,
@@ -59,13 +68,16 @@ export const createPharmacy = async (req, res, next) => {
     cityId,
     customId,
   };
+  console.log("Creating pharmacy in database");
   const pharmacy = await pharmacyModel.create(pharmacyObject);
   if (!pharmacy) {
+    console.log("Failed to add pharmacy to database");
     await cloudinary.uploader.destroy(public_id);
     return next(
       new Error("try again later , fail to add your pharmacy", { cause: 400 })
     );
   }
+  console.log("Pharmacy added successfully");
   res.status(200).json({ message: "Added Done", pharmacy });
 };
 
