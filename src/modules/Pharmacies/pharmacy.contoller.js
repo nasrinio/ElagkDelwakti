@@ -17,8 +17,9 @@ export const createPharmacy = async (req, res, next) => {
     operatingHours,
     streetName,
     buildingNum,
+    cityId,
   } = req.body;
-  const { medicineId, cityId } = req.query;
+  const { medicineId } = req.query;
   console.log("medicineId:", medicineId);
   console.log("cityId:", cityId);
   // check medicineId and cityId
