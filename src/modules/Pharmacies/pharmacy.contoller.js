@@ -41,7 +41,7 @@ export const createPharmacy = async (req, res, next) => {
   //     replacement: "",
   //     lower: true,
   //   });
-  logo
+  //logo
   if (!req.file) {
     console.log("No logo uploaded");
     return next(new Error("please upload your logo", { cause: 400 }));
